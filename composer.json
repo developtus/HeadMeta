@@ -13,7 +13,7 @@
   "minimum-stability": "dev",
   "require": {
     "php": ">=7.0.0",
-    "developtus/ffPHP": "@dev"
+    "developtus/ff-php": "@dev"
   },
   "autoload": {
     "psr-4": {
