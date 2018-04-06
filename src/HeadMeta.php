@@ -158,7 +158,7 @@ class HeadMeta
 
         // prepare operation
         $operation = strtolower($match[1]);
-        $header = Text::uncamelize($match[2], '-');
+        $header = uncamelize($match[2], '-');
 
         // check supported header
         if (!isset($this->meta[$header])) {
@@ -289,31 +289,31 @@ class HeadMeta
     {
         $return = '';
         foreach ($this->meta as $tipo => $metas) {
-            // charset no tiene content solamente charset=""
+            // charset is only charset="xxx"
             if ($tipo === self::CHARSET) {
                 if (!empty(current($metas))) {
-                    $return .= $this->tag->tagHtml('meta', [$tipo => current($metas)], true, true);
+                    $return .= '<meta' . htmlAttributes([$tipo => current($metas)]) . '>';
                 }
                 continue;
             }
 
-            // los customs ya vienen pre armados, solo juntamos y continuamos
+            // customs are considered to be well-formed
             if ($tipo === self::CUSTOM) {
                 $return .= implode('', $metas);
                 continue;
             }
 
-            // los links debemos unirlos con la clave que es el href
+            // links 
             if ($tipo === self::LINK) {
                 foreach ($metas as $href => $attribs) {
-                    $return .= $this->tag->tagHtml('link', ['href' => $href] + $attribs, true, true);
+                    $return .= '<link' . htmlAttributes(['href' => $href] + $attribs) . '>';
                 }
                 continue;
             }
 
-            // generamos nuestras <meta xxx="" content="">
+            // generating <meta xxx="" content="">
             foreach ($metas as $key => $content) {
-                $return .= $this->tag->tagHtml('meta', [$tipo => $key] + $content, true, true);
+                $return .= '<meta' . htmlAttributes([$tipo => $key] + $content) . '>';
             }
         }
 
@@ -321,7 +321,7 @@ class HeadMeta
     }
 
     /**
-     * Alias de __toString
+     * Alias of __toString
      * @return string
      */
     public function __invoke(): string
