@@ -1,0 +1,23 @@
+{
+  "name": "developtus/HeadMeta",
+  "description": "Meta tags html manager for the document header",
+  "version": "0.1.0",
+  "authors": [
+    {
+      "name": "Emilio Degiovanni",
+      "email": "info@developtus.com.com",
+      "homepage": "http://www.developtus.com",
+      "role": "Developer"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "php": ">=7.0.0",
+    "developtus/ffPHP": "@dev"
+  },
+  "autoload": {
+    "psr-4": {
+      "Developtus\\Utils\\": "src/"
+    }
+  }
+}
