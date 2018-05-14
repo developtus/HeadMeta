@@ -265,7 +265,7 @@ class HeadMeta
     public function setDescription(string $description = null): self
     {
         if ($description) {
-            $this->setName('description', cutText($description, self::$metaDescriptionLength));
+            $this->setName('description', cut_text($description, self::$metaDescriptionLength));
         } else {
             $this->removeName('description');
         }
@@ -292,7 +292,7 @@ class HeadMeta
             // charset is only charset="xxx"
             if ($tipo === self::CHARSET) {
                 if (!empty(current($metas))) {
-                    $return .= '<meta' . htmlAttributes([$tipo => current($metas)]) . '>';
+                    $return .= '<meta' . html_attributes([$tipo => current($metas)]) . '>';
                 }
                 continue;
             }
@@ -306,14 +306,14 @@ class HeadMeta
             // links 
             if ($tipo === self::LINK) {
                 foreach ($metas as $href => $attribs) {
-                    $return .= '<link' . htmlAttributes(['href' => $href] + $attribs) . '>';
+                    $return .= '<link' . html_attributes(['href' => $href] + $attribs) . '>';
                 }
                 continue;
             }
 
             // generating <meta xxx="" content="">
             foreach ($metas as $key => $content) {
-                $return .= '<meta' . htmlAttributes([$tipo => $key] + $content) . '>';
+                $return .= '<meta' . html_attributes([$tipo => $key] + $content) . '>';
             }
         }
 
